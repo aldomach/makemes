@@ -12,6 +12,8 @@ layout = [
     [sg.Text("Escribe el separador:")],
     [sg.Input(key="-SEPARATOR-")],
     [sg.Checkbox("Usar separador", key="-USE-SEPARATOR-")],
+    [sg.Text("Elige el formato:")],
+    [sg.Combo(["Mayúsculas", "Minúsculas", "Primera mayúscula"], key="-FORMAT-")],
     [sg.Button("Crear"), sg.Button("Salir")]
 ]
 
@@ -31,6 +33,7 @@ while True:
         end = values["-END-"]
         separator = values["-SEPARATOR-"]
         use_separator = values["-USE-SEPARATOR-"]
+        format = values["-FORMAT-"]
         if folder and start and end:
             # validar que los años sean enteros y que el inicial sea menor o igual que el final
             try:
@@ -44,6 +47,15 @@ while True:
                             if use_separator and separator:
                                 # reemplazar los espacios por el separador
                                 mes = mes.replace(" ", separator)
+                            if format == "Mayúsculas":
+                                # convertir el mes a mayúsculas
+                                mes = mes.upper()
+                            elif format == "Minúsculas":
+                                # convertir el mes a minúsculas
+                                mes = mes.lower()
+                            elif format == "Primera mayúscula":
+                                # convertir la primera letra del mes a mayúscula
+                                mes = mes.capitalize()
                             os.makedirs(os.path.join(folder, str(año), mes), exist_ok=True)
                     # mostrar un mensaje de éxito
                     sg.popup("Se han creado las carpetas correctamente.")
