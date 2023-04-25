@@ -57,8 +57,8 @@ while True:
                                 # convertir la primera letra del mes a mayúscula
                                 mes = mes.capitalize()
                             if include_year:
-                                # agregar el año al nombre del mes
-                                mes = f"{año} {mes}"
+                                # agregar el año al nombre del mes con el separador
+                                mes = f"{año}{separator}{mes}"
                             os.makedirs(os.path.join(folder, str(año), mes), exist_ok=True)
                     # mostrar un mensaje de éxito
                     sg.popup("Se han creado las carpetas correctamente.")
