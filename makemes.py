@@ -1,19 +1,23 @@
 import PySimpleGUI as sg
 import os
+import datetime
+
+# obtener el año actual
+current_year = datetime.datetime.now().year
 
 # crear el diseño de la interfaz gráfica
 layout = [
     [sg.Text("Selecciona una carpeta:")],
-    [sg.Input(key="-FOLDER-"), sg.FolderBrowse()],
+    [sg.Input(key="-FOLDER-", default_text="."), sg.FolderBrowse()],
     [sg.Text("Escribe el año inicial:")],
-    [sg.Input(key="-START-")],
+    [sg.Input(key="-START-", default_text=current_year)],
     [sg.Text("Escribe el año final:")],
-    [sg.Input(key="-END-")],
+    [sg.Input(key="-END-", default_text=current_year)],
     [sg.Text("Elige el separador:")],
-    [sg.Combo(["_", "-", ",", " ", "."], key="-SEPARATOR-")],
+    [sg.Combo(["_", "-", ",", " ", "."], key="-SEPARATOR-", default_value="-")],
     [sg.Text("Elige el formato:")],
-    [sg.Combo(["Mayúsculas", "Minúsculas", "Primera mayúscula"], key="-FORMAT-")],
-    [sg.Checkbox("Incluir año al nombre de la carpeta", key="-INCLUDE-YEAR-")],
+    [sg.Combo(["Mayúsculas", "Minúsculas", "Primera mayúscula"], key="-FORMAT-", default_value="Primera mayúscula")],
+    [sg.Checkbox("Incluir año al nombre de la carpeta", key="-INCLUDE-YEAR-", default=True)],
     [sg.Button("Crear"), sg.Button("Salir")]
 ]
 
