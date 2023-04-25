@@ -13,6 +13,7 @@ layout = [
     [sg.Combo(["_", "-", ",", " ", "."], key="-SEPARATOR-")],
     [sg.Text("Elige el formato:")],
     [sg.Combo(["Mayúsculas", "Minúsculas", "Primera mayúscula"], key="-FORMAT-")],
+    [sg.Checkbox("Incluir año al nombre de la carpeta", key="-INCLUDE-YEAR-")],
     [sg.Button("Crear"), sg.Button("Salir")]
 ]
 
@@ -32,6 +33,7 @@ while True:
         end = values["-END-"]
         separator = values["-SEPARATOR-"]
         format = values["-FORMAT-"]
+        include_year = values["-INCLUDE-YEAR-"]
         if folder and start and end:
             # validar que los años sean enteros y que el inicial sea menor o igual que el final
             try:
@@ -54,6 +56,9 @@ while True:
                             elif format == "Primera mayúscula":
                                 # convertir la primera letra del mes a mayúscula
                                 mes = mes.capitalize()
+                            if include_year:
+                                # agregar el año al nombre del mes
+                                mes = f"{año} {mes}"
                             os.makedirs(os.path.join(folder, str(año), mes), exist_ok=True)
                     # mostrar un mensaje de éxito
                     sg.popup("Se han creado las carpetas correctamente.")
