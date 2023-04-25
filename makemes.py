@@ -11,7 +11,6 @@ layout = [
     [sg.Input(key="-END-")],
     [sg.Text("Elige el separador:")],
     [sg.Combo(["_", "-", ",", " ", "."], key="-SEPARATOR-")],
-    [sg.Checkbox("Usar separador", key="-USE-SEPARATOR-")],
     [sg.Text("Elige el formato:")],
     [sg.Combo(["Mayúsculas", "Minúsculas", "Primera mayúscula"], key="-FORMAT-")],
     [sg.Button("Crear"), sg.Button("Salir")]
@@ -32,7 +31,6 @@ while True:
         start = values["-START-"]
         end = values["-END-"]
         separator = values["-SEPARATOR-"]
-        use_separator = values["-USE-SEPARATOR-"]
         format = values["-FORMAT-"]
         if folder and start and end:
             # validar que los años sean enteros y que el inicial sea menor o igual que el final
@@ -44,7 +42,7 @@ while True:
                     meses = ["01 enero", "02 febrero", "03 marzo", "04 abril", "05 mayo", "06 junio", "07 julio", "08 agosto", "09 septiembre", "10 octubre", "11 noviembre", "12 diciembre"]
                     for año in range(start, end + 1):
                         for mes in meses:
-                            if use_separator and separator:
+                            if separator:
                                 # reemplazar los espacios por el separador
                                 mes = mes.replace(" ", separator)
                             if format == "Mayúsculas":
