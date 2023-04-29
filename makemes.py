@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import os
 import datetime
-# a
+
 # obtener el año actual
 current_year = datetime.datetime.now().year
 
